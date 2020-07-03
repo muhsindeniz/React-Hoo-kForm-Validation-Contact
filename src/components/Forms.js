@@ -1,7 +1,5 @@
 import React from 'react';
-import { Input, Button } from 'antd';
 import 'antd/dist/antd.css';
-import TextArea from 'antd/lib/input/TextArea';
 import { useForm } from 'react-hook-form';
 
 let Forms = () => {

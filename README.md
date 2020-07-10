@@ -1,68 +1,77 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-Hook-Form-Validation-Contact
 
-## Available Scripts
+A contact form application made using React Hook.
 
-In the project directory, you can run:
+**For installation:**
 
-### `npm start`
+git clone https://gitlab.com/mnknsro4133/react-hook-form-validation-contact.git <br/>
+cd react-e-commerce-add-to-cart<br/>
+npm start
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+**To install hooks for your project:**
 
-### `npm test`
+npm install react-hook-form
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**To include the library:**
 
-### `npm run build`
+import { useForm } from 'react-hook-form';
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Example usage
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+```
+let Forms = () => {
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    const { register, handleSubmit, errors } = useForm();
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    const onSubmit = (data) => {
+        console.log(data)
+    }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    return (
+        <div className="container">
+            <h2 style={{ marginTop: 10 }}>Contact</h2>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+            <form onSubmit={handleSubmit(onSubmit)}>
 
-## Learn More
+                <label>Name</label>
+                <input type="text" placeholder="Enter your name" name="name" ref={register({
+                    required: "Lütfen Adınızı Girin",
+                    minLength: { value: 3, message: "En az 3 karakter giriniz.." }
+                })} />
+                {errors.name && <div className="eror">{errors.name.message}</div>}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+                <label>E-Mail</label>
+                <input type="email" placeholder="Enter your e-mail" name="email" ref={register({
+                    required: "Lütfen E-mail Girin"
+                })} />
+                {errors.email && <div className="eror">{errors.email.message}</div>}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+                <label>Subject</label>
+                <input type="text" placeholder="Enter your subject" name="subject" ref={register({
+                    required: "Lütfen Konu Girin",
+                    minLength: { value: 6, message: "Lütfen en az 6 karakter giriniz.." }
+                })} />
+                {errors.subject && <div className="eror">{errors.subject.message}</div>}
 
-### Code Splitting
+                <label>Message</label>
+                <textarea rows="4" type="text" placeholder="Enter your message" name="message" ref={register({
+                    required: "Lütfen Mesaj Girin",
+                    minLength: { value: 10, message: "Lütfen an az 10 karakterlik mesaj giriniz.." }
+                })} />
+                {errors.message && <div className="eror">{errors.message.message}</div>}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+                <button type="submit">Send Message</button>
 
-### Analyzing the Bundle Size
+            </form>
+        </div>
+    );
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+}
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+export default Forms;
+```
